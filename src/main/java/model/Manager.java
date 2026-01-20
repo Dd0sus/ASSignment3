@@ -1,6 +1,6 @@
 package model;
 
-public class Manager extends Staff {
+public class Manager extends Staff implements Promotable {
 
     private int teamSize;
 
@@ -26,5 +26,10 @@ public class Manager extends Staff {
     @Override
     public String toString() {
         return super.toString() + " [Manager TeamSize=" + teamSize + "]";
+    }
+
+    @Override
+    public void promote() {
+        System.out.println(name + " has been promoted!");
     }
 }
