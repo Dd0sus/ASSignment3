@@ -19,5 +19,5 @@ Week 6 Assignment. Refactored previous project to implement Interfaces, Abstract
 ## Usage
 
 1.  Clone repository.
-2.  Open in Java IDE (IntelliJ/Eclipse).
+2.  Open in IntelliJ.
 3.  Run `Main.java`.
