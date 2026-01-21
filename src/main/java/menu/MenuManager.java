@@ -1,6 +1,7 @@
 package menu;
 
 import model.*;
+import exception.InvalidInputException; // <--- 1. IMPORT
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,61 +35,85 @@ public class MenuManager implements Menu {
 
             try {
                 String input = scanner.nextLine();
-                choice = Integer.parseInt(input);
+
+                try {
+                    choice = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    throw new NumberFormatException("That is not a number!");
+                }
+
+                if (choice < 1 || choice > 5) {
+                    throw new InvalidInputException("Option must be between 1 and 5");
+                }
 
                 switch (choice) {
-                    case 1:
-                        addCashier();
-                        break;
-                    case 2:
-                        addManager();
-                        break;
+                    case 1: addCashier(); break;
+                    case 2: addManager(); break;
                     case 3:
                         for (Staff s : staffList) System.out.println(s);
                         break;
-                    case 4:
-                        for (Staff s : staffList) s.work();
-                        break;
-                    case 5:
-                        System.out.println("Exiting...");
-                        break;
-                    default:
-                        System.out.println("Invalid option.");
+                    case 4: demonstratePolymorphism(); break;
+                    case 5: System.out.println("Exiting......................................................................................................................"); break;
                 }
+
             } catch (NumberFormatException e) {
-                System.out.println("Error: Enter a valid number.");
+                System.out.println("Input Error: " + e.getMessage());
+
+
+            } catch (InvalidInputException e) {
+                System.out.println("Menu Error: " + e.getMessage());
+
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Validation Error: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Unexpected error: " + e.getMessage());
             }
         }
     }
 
+    private void demonstratePolymorphism() {
+        System.out.println("--- Polymorphism Demo ---");
+        for (Staff s : staffList) {
+            s.work();
+            if (s instanceof Promotable) {
+                ((Promotable) s).promote();
+            }
+        }
+    }
+
     private void addCashier() {
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Salary: ");
-        double salary = Double.parseDouble(scanner.nextLine());
-        System.out.print("Register Number: ");
-        int reg = Integer.parseInt(scanner.nextLine());
-        staffList.add(new Cashier(id, name, salary, reg));
-        System.out.println("Cashier added successfully!");
+        try {
+            System.out.print("ID: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Salary: ");
+            double salary = Double.parseDouble(scanner.nextLine());
+            System.out.print("Register Number: ");
+            int reg = Integer.parseInt(scanner.nextLine());
+
+            staffList.add(new Cashier(id, name, salary, reg));
+            System.out.println("Cashier added successfully!");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid numbers for ID/Salary.");
+        }
     }
 
     private void addManager() {
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Salary: ");
-        double salary = Double.parseDouble(scanner.nextLine());
-        System.out.print("Team Size: ");
-        int size = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("ID: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Salary: ");
+            double salary = Double.parseDouble(scanner.nextLine());
+            System.out.print("Team Size: ");
+            int size = Integer.parseInt(scanner.nextLine());
 
-        staffList.add(new Manager(id, name, salary, size));
-        System.out.println("Manager added successfully!");
+            staffList.add(new Manager(id, name, salary, size));
+            System.out.println("Manager added successfully!");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid numbers for ID/Salary.");
+        }
     }
 }
