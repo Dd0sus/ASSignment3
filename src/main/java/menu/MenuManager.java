@@ -1,7 +1,7 @@
 package menu;
 
 import model.*;
-import exception.InvalidInputException; // <--- 1. IMPORT
+import exception.InvalidInputException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,7 +95,7 @@ public class MenuManager implements Menu {
             staffList.add(new Cashier(id, name, salary, reg));
             System.out.println("Cashier added successfully!");
         } catch (NumberFormatException e) {
-            System.out.println("Error: Please enter valid numbers for ID/Salary.");
+            System.out.println("Error: Enter valid numbers for ID/Salary!!!!!!!!!!!!!!!!");
         }
     }
 
@@ -113,7 +113,7 @@ public class MenuManager implements Menu {
             staffList.add(new Manager(id, name, salary, size));
             System.out.println("Manager added successfully!");
         } catch (NumberFormatException e) {
-            System.out.println("Error: Please enter valid numbers for ID/Salary.");
+            System.out.println("Error: Enter valid numbers for ID/Salary!!!!!!!!!!!!!!!!");
         }
     }
 }
