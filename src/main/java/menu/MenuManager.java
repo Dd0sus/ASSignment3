@@ -34,7 +34,7 @@ public class MenuManager implements Menu {
 
             try {
                 String input = scanner.nextLine();
-                choice = Integer.parseInt(input); // Can throw NumberFormatException
+                choice = Integer.parseInt(input);
 
                 switch (choice) {
                     case 1:
@@ -47,7 +47,7 @@ public class MenuManager implements Menu {
                         for (Staff s : staffList) System.out.println(s);
                         break;
                     case 4:
-                        for (Staff s : staffList) s.work(); // Polymorphism in action
+                        for (Staff s : staffList) s.work();
                         break;
                     case 5:
                         System.out.println("Exiting...");
@@ -56,7 +56,7 @@ public class MenuManager implements Menu {
                         System.out.println("Invalid option.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid number!");
+                System.out.println("Error: Enter a valid number.");
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
             } catch (Exception e) {
@@ -74,8 +74,6 @@ public class MenuManager implements Menu {
         double salary = Double.parseDouble(scanner.nextLine());
         System.out.print("Register Number: ");
         int reg = Integer.parseInt(scanner.nextLine());
-
-        // This will throw exception if data is invalid
         staffList.add(new Cashier(id, name, salary, reg));
         System.out.println("Cashier added successfully!");
     }
